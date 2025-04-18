@@ -1,16 +1,37 @@
-import { getFormattedDay } from "./utils.js";
-import { getFormattedHour } from "./utils.js";
+import { getFormattedDay, getFormattedHour } from "./utils.js";
+import { v4 as uniqueID } from "uuid";
 
 class Task {
-  constructor(name, description = "", dueTo = null, category="") {
+  static category = {
+    none: "",
+    urgent: "Urgent",
+    important: "Important",
+    later: "Later",
+  };
+
+  static type = {
+    none: "",
+    personal: "Personal",
+    work: "Work",
+    school: "School",
+    email: "Email",
+    calls: "Calls",
+    meetings: "Meetings",
+    shopping: "Shopping",
+    other: "Other",
+  };
+
+  constructor(name, description = "", dueTo = null, classification = { category: "", type: "" }, completed = false) {
+    this.id = uniqueID();
+
     this.name = name;
     this.description = description;
     this.dueTo = dueTo;
 
-    this.completed = false;
-    this.category = category;
-    this.creation = {time: getFormattedHour(), day: getFormattedDay()};
-    this.completedAt = {time: null, day: null};
+    this.completed = completed;
+    this.classification = classification;
+    this.creation = { hour: getFormattedHour(), day: getFormattedDay() };
+    this.completedAt = { hour: null, day: null };
   }
 
   complete() {

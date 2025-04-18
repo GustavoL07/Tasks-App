@@ -1,27 +1,34 @@
 import "../css/TaskInput.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Task from "../Task.js";
 
 export default function taskInput({
   nameValue,
   descriptionValue,
   dueToValue,
   categoryValue,
+  typeValue,
   nameOnChange,
   dueToOnChange,
   descriptionOnChange,
   categoryOnChange,
+  typeOnChange,
   onSubmit,
   labelText,
 }) {
   return (
     <form
+      id="form"
+      name="input-form"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit();
       }}>
       <div className="input-container">
         <input
+          id="TEXT"
+          name="TEXT"
           type="text"
           className="text-input"
           placeholder={labelText.name}
@@ -33,6 +40,8 @@ export default function taskInput({
         />
 
         <textarea
+          id="TEXT-AREA"
+          name="TEXT-AREA"
           className="text-description"
           placeholder={labelText.description}
           value={descriptionValue}
@@ -40,6 +49,8 @@ export default function taskInput({
 
         <div id="date-container">
           <DatePicker
+            id="DATE-PICKER"
+            name="DATE-PICKER"
             className="date-input"
             selected={dueToValue}
             onChange={(date) => dueToOnChange(date)}
@@ -50,17 +61,35 @@ export default function taskInput({
           />
 
           <select
+            id="SELECT-CATEGORY"
+            name="SELECT-CATEGORY"
             className="category-select"
             value={categoryValue}
             onChange={(e) => categoryOnChange(e.target.value)}>
-            <option value="">Category</option>
-            <option value="Urgent">Urgent</option>
-            <option value="Important">Important</option>
-            <option value="Later">Later</option>
+            <option key={Task.category.none} value={Task.category.none}>Category</option>
+
+            {Object.entries(Task.category).map(([key, value]) => {
+              return key === "none" ? null : <option key={key} value={value}>{value}</option>;
+            })}
+          </select>
+
+          <select
+            id="SELECT-TYPE"
+            name="SELECT-TYPE"
+            className="category-select"
+            value={typeValue}
+            onChange={(e) => typeOnChange(e.target.value)}>
+            <option key={Task.type.none} value={Task.type.none}>Type</option>
+
+            {Object.entries(Task.type).map(([key, value]) => {
+              return key === "none" ? null : <option key={key} value={value}>{value}</option>
+            })}
           </select>
         </div>
 
         <button
+          id="BUTTON"
+          name="BUTTON"
           type="submit"
           className="task-btn">
           {labelText.btnText}

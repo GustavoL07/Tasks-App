@@ -43,10 +43,10 @@ button {
 }
 
 .task-list-container {
-  margin-top: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 1rem;
 }
 
 .task-list-container ul {
@@ -69,4 +69,31 @@ button {
 .dialog-btn .edit:hover {
   background-color: rgb(0, 0, 192);
   box-shadow: 0 0 5px rgb(0, 0, 192);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 128, 0.5);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background 2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 128, 0.8);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 128, 0.5) transparent;
 }

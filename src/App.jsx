@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import useTaskManager from "./hooks/useTaskManager.js";
 import { useFeedbackMsg } from "./hooks/useFeedbackMsg.js";
 import { formatDueToValue } from "./utils.js";
@@ -27,33 +27,53 @@ export default function App() {
     taskList,
     selectedTask,
     setSelectedTask,
-    deleteIndex,
-    setDeleteIndex,
     addTask,
     editTask,
     deleteTask,
     toggleTaskCompleted,
+    addRandomTask,
+    deleteAllTasks,
   } = useTaskManager(showFeedbackMsg, sortMethod, searchValue);
 
   const [taskInputValue, setTaskInputValue] = useState("");
   const [taskDescriptionValue, setTaskDescriptionValue] = useState("");
   const [taskDueToValue, setTaskDueToValue] = useState(null);
   const [taskCategory, setTaskCategory] = useState("");
+  const [taskType, setTaskType] = useState("");
 
   const [taskEditedInputValue, setTaskEditedInputValue] = useState("");
   const [taskEditedDescriptionValue, setTaskEditedDescriptionValue] = useState("");
   const [taskEditedDueToValue, setTaskEditedDueToValue] = useState(null);
   const [taskEditedCategoryValue, setTaskEditedCategoryValue] = useState("");
+  const [taskEditedTypeValue, setTaskEditedTypeValue] = useState("");
 
-  function addTaskToList() {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "+") {
+        addRandomTask();
+      } else if (event.key === "-") {
+        deleteAllTasks();
+      } else if (event.key === "*") {
+        console.log(taskList);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  });
+
+  function handleAddTask() {
     if (!taskInputValue.trim()) return;
 
-    addTask(taskInputValue, taskDescriptionValue, taskDueToValue, taskCategory);
+    addTask(taskInputValue, taskDescriptionValue, taskDueToValue, {
+      category: taskCategory,
+      type: taskType,
+    });
 
-    setTaskInputValue("");
-    setTaskDescriptionValue("");
-    setTaskDueToValue(null);
-
+    resetTaskValues();
     addTaskDialogRef.current.close();
   }
 
@@ -64,15 +84,27 @@ export default function App() {
       name: taskEditedInputValue,
       description: taskEditedDescriptionValue,
       dueTo: formatDueToValue(taskEditedDueToValue),
-      category: taskEditedCategoryValue,
+      classification: { category: taskEditedCategoryValue, type: taskEditedTypeValue },
     });
 
+    resetTaskEditedValues();
+    taskEditDialogRef.current.close();
+  }
+
+  function resetTaskValues() {
+    setTaskInputValue("");
+    setTaskDescriptionValue("");
+    setTaskDueToValue(null);
+    setTaskCategory("");
+    setTaskType("");
+  }
+
+  function resetTaskEditedValues() {
     setTaskEditedInputValue("");
     setTaskEditedDescriptionValue("");
     setTaskEditedDueToValue(null);
     setTaskEditedCategoryValue("");
-
-    taskEditDialogRef.current.close();
+    setTaskEditedTypeValue("");
   }
 
   function openEditDialog() {
@@ -81,6 +113,7 @@ export default function App() {
     setTaskEditedInputValue("");
     setTaskEditedDescriptionValue("");
     setTaskEditedDueToValue(null);
+    setTaskEditedCategoryValue("");
   }
 
   return (
@@ -94,23 +127,26 @@ export default function App() {
           setTaskInputValue("");
           setTaskDescriptionValue("");
           setTaskDueToValue(null);
+          setTaskCategory("");
         }}>
         <TaskInput
           nameValue={taskInputValue}
           descriptionValue={taskDescriptionValue}
           dueToValue={taskDueToValue}
           categoryValue={taskCategory}
+          typeValue={taskType}
           nameOnChange={setTaskInputValue}
           descriptionOnChange={setTaskDescriptionValue}
           dueToOnChange={setTaskDueToValue}
           categoryOnChange={setTaskCategory}
+          typeOnChange={setTaskType}
           labelText={{
             name: "Task Name",
             description: "Task Description",
             dueDate: "Due Date",
             btnText: "Add Task",
           }}
-          onSubmit={addTaskToList}
+          onSubmit={handleAddTask}
         />
       </TaskDialog>
 
@@ -120,16 +156,18 @@ export default function App() {
         title="Task Details"
         onClose={() => taskDetailsDialogRef.current.close()}>
         <TaskDetails task={selectedTask} />
-        <div className="dialog-btn">
-          <button
-            className="edit"
-            onClick={() => {
-              taskDetailsDialogRef.current.close();
-              openEditDialog();
-            }}>
-            Edit
-          </button>
-        </div>
+        {!selectedTask?.completed && (
+          <div className="dialog-btn">
+            <button
+              className="edit"
+              onClick={() => {
+                taskDetailsDialogRef.current.close();
+                openEditDialog();
+              }}>
+              Edit
+            </button>
+          </div>
+        )}
       </TaskDialog>
 
       {/* EDIT TASK */}
@@ -147,10 +185,12 @@ export default function App() {
           descriptionValue={taskEditedDescriptionValue}
           dueToValue={taskEditedDueToValue}
           categoryValue={taskEditedCategoryValue}
+          typeValue={taskEditedTypeValue}
           nameOnChange={setTaskEditedInputValue}
           descriptionOnChange={setTaskEditedDescriptionValue}
           dueToOnChange={setTaskEditedDueToValue}
           categoryOnChange={setTaskEditedCategoryValue}
+          typeOnChange={setTaskEditedTypeValue}
           labelText={{
             name: "New Name",
             description: "New Description",
@@ -168,7 +208,7 @@ export default function App() {
         <TaskDeletion
           task={selectedTask}
           onClickDelete={() => {
-            deleteTask(deleteIndex);
+            deleteTask(selectedTask.id);
             taskDeleteDialogRef.current.close();
           }}
         />
@@ -181,8 +221,7 @@ export default function App() {
         onSearchValueChange={setSearchValue}
         addTaskOnClick={() => addTaskDialogRef.current.showModal()}
         sortValue={sortMethod}
-        onSortChange={setSortMethod}
-      ></Header>
+        onSortChange={setSortMethod}></Header>
 
       <FeedbackMsg
         text={feedbackMsg.text}
@@ -191,20 +230,19 @@ export default function App() {
 
       <div className="task-list-container">
         <ul>
-          {taskList.map((task, index) => (
+          {taskList.map((task) => (
             <TaskItem
-              key={index}
+              key={task.id}
               task={task}
               onDetailsClick={() => {
                 setSelectedTask(task);
                 taskDetailsDialogRef.current.showModal();
               }}
               openDeleteDialog={() => {
-                setDeleteIndex(index);
                 setSelectedTask(task);
                 taskDeleteDialogRef.current.showModal();
               }}
-              onToggleComplete={() => toggleTaskCompleted(index)}
+              onToggleComplete={() => toggleTaskCompleted(task)}
             />
           ))}
         </ul>

@@ -18,6 +18,8 @@ export default function Header({
         </button>
 
         <input
+          id="SEARCH"
+          name="SEARCH"
           type="text"
           className="text-input"
           placeholder="Search Task"
@@ -26,6 +28,8 @@ export default function Header({
         />
 
         <select
+          id="SORT"
+          name="SORT"
           className="category-select"
           value={sortValue}
           onChange={(e) => onSortChange(e.target.value)}>
@@ -36,6 +40,7 @@ export default function Header({
           <option value="due-date-late">Due Date (Latest)</option>
           <option value="completed">Completed</option>
           <option value="category">Category</option>
+          <option value="type">Type</option>
         </select>
       </div>
     </>

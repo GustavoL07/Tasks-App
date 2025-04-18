@@ -19,17 +19,22 @@
   justify-content: space-between;
 }
 
-.details-name{
-  font-size: 1.65rem;
+.details-name {
+  font-size: 1.75rem;
   font-weight: 800;
   color: navy;
   text-align: center;
+  margin: 5px 5px;
 }
 
 .creation {
   font-size: 0.9rem;
   font-weight: 750;
   color: rgb(165, 165, 165);
+}
+
+.creation-c-container {
+  justify-content: flex-end;
 }
 
 .creation-c {
@@ -50,13 +55,19 @@
 
 #category {
   color: black;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   background-color: rgba(240, 240, 240, 0.35);
   border-radius: 5px;
 }
 
-.description{
+.description {
   background-color: rgba(240, 240, 240, 0.35);
   border-radius: 5px;
   padding: 5px;
+}
+
+.classification-type{
+  font-size: 1.25rem;
+  font-weight: 750;
+  color: black;
 }

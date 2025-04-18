@@ -1,16 +1,26 @@
 import { useState } from "react";
 import Task from "../Task";
-import { getFormattedDay, getFormattedHour, formatDueToValue, parseDate } from "../utils";
+import {
+  getFormattedDay,
+  getFormattedHour,
+  formatDueToValue,
+  parseDate,
+  randomTaskGenerator,
+} from "../utils";
 
 export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue) {
   const [taskList, setTaskList] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [deleteIndex, setDeleteIndex] = useState(null);
 
-  function addTask(name, description, dueTo, category) {
-    const newTask = new Task(name, description, formatDueToValue(dueTo), category);
+  function addTask(name, description, dueTo, classification) {
+    const newTask = new Task(name, description, formatDueToValue(dueTo), classification);
     setTaskList([newTask, ...taskList]);
     showFeedbackMsg("Task Created!", "add");
+  }
+
+  function addRandomTask() {
+    const randomTask = { ...randomTaskGenerator() };
+    addTask(randomTask.name, randomTask.description, randomTask.dueDate, randomTask.classification);
   }
 
   function editTask(originalTask, updatedValues) {
@@ -22,23 +32,33 @@ export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue)
     showFeedbackMsg("Changes Saved!", "edited");
   }
 
-  function deleteTask(indexToDelete) {
-    const newList = taskList.filter((_, index) => index !== indexToDelete);
+  function deleteTask(id) {
+    const newList = taskList.filter((task) => task.id !== id);
     setTaskList(newList);
     showFeedbackMsg("Task Deleted!", "delete");
   }
 
-  function toggleTaskCompleted(index) {
-    const updated = [...taskList];
-    const task = updated[index];
-    task.completed = !task.completed;
-    task.completedAt = {
-      day: getFormattedDay(),
-      hour: getFormattedHour(),
-    };
+  function deleteAllTasks() {
+    setTaskList([]);
+    showFeedbackMsg("ALL Tasks Deleted!", "delete");
+  }
+
+  function toggleTaskCompleted(targetTask) {
+    const updated = taskList.map((task) => {
+      if (task.id === targetTask.id) {
+        const updatedTask = { ...task };
+        updatedTask.completed = !task.completed;
+        updatedTask.completedAt = {
+          hour: getFormattedHour(),
+          day: getFormattedDay(),
+        };
+        return updatedTask;
+      }
+      return task;
+    });
 
     setTaskList(updated);
-    if (task.completed) showFeedbackMsg("Task Completed!", "completed");
+    if (!targetTask.completed) showFeedbackMsg("Task Completed!", "completed");
   }
 
   const filteredTasks = taskList.filter((task) => {
@@ -49,14 +69,34 @@ export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue)
     switch (sortMethod) {
       case "name-asc":
         return a.name.localeCompare(b.name);
+
       case "name-desc":
         return b.name.localeCompare(a.name);
+
       case "due-date-soon":
-        return parseDate(a.dueTo || Infinity) - parseDate(b.dueTo || Infinity);
+        return (
+          (a.dueTo ? parseDate(a.dueTo) : Infinity) - (b.dueTo ? parseDate(b.dueTo) : Infinity)
+        );
+
       case "due-date-late":
-        return parseDate(b.dueTo || 0) - parseDate(a.dueTo || 0);
+        return (b.dueTo ? parseDate(b.dueTo) : 0) - (a.dueTo ? parseDate(a.dueTo) : 0);
+
       case "category":
-        return (a.category || 0).localeCompare(b.category || 0);
+        if (a.completed && !b.completed) return 1;
+        if (!a.completed && b.completed) return -1;
+
+        return (a.classification?.category?.toLowerCase() || "zzz").localeCompare(
+          b.classification?.category?.toLowerCase() || "zzz"
+        );
+
+      case "type":
+        if (a.completed && !b.completed) return 1;
+        if (!a.completed && b.completed) return -1;
+
+        return (a.classification?.type?.toLowerCase() || "zzz").localeCompare(
+          b.classification?.type?.toLowerCase() || "zzz"
+        );
+
       case "completed":
         if (a.completed === b.completed) return 0;
         else return a.completed ? -1 : 0;
@@ -65,15 +105,16 @@ export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue)
         return 0;
     }
   });
+
   return {
     taskList: sortedTasks,
     selectedTask,
     setSelectedTask,
-    deleteIndex,
-    setDeleteIndex,
     addTask,
     editTask,
     deleteTask,
     toggleTaskCompleted,
+    addRandomTask,
+    deleteAllTasks,
   };
 }

@@ -12,27 +12,27 @@ export default function TaskDetails({ task }) {
       )}
 
       <div>
-        {task.category && !task.completed && (
+        {task.classification?.category && !task.completed && (
           <p
             className="creation-c"
             id="category">
-            {task.category}
+            {task.classification.category}
           </p>
         )}
-        <p className="details-name">{task.name}</p>
-        <div className="main">
-          {task.dueTo && (
-            <div>
-              <p className="creation">Due To:</p>
-              <p
-                className="creation"
-                id="time">
-                {task.dueTo}
-              </p>
-            </div>
-          )}
 
+        <p className="details-name">{task.name}</p>
+
+        <div className="main">
           <div>
+            <p className="creation">Due To:</p>
+            <p
+              className="creation"
+              id="time">
+              {task.dueTo || "--/--/----"}
+            </p>
+          </div>
+
+          <div className="creation-c-container">
             <p className="creation-c">Created At:</p>
             <p
               className="creation-c"
@@ -48,7 +48,15 @@ export default function TaskDetails({ task }) {
         </div>
       </div>
 
-      <div className="description">{task.description && <p>{task.description}</p>}</div>
+      {task.classification.type && (
+        <p className="classification-type">{task.classification.type}</p>
+      )}
+
+      {task.description && (
+        <div className="description">
+          <p>{task.description}</p>
+        </div>
+      )}
     </div>
   );
 }
