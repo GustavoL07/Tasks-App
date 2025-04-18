@@ -1,0 +1,35 @@
+.task-deletion-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.task-deletion-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--app-col);
+  margin-bottom: 0.5rem;
+}
+
+.task-deletion-warning {
+  font-size: 1rem;
+  color: var(--gray);
+  margin-bottom: 1.5rem;
+}
+
+.danger-text {
+  color: #ff1900;
+  font-weight: bold;
+}
+
+.delete-btn {
+  font-size: 1.5rem;
+  background-color: rgb(238, 92, 92);
+  transition: transform 0.2 ease;
+}
+
+.delete-btn:hover {
+  background-color: red;
+  box-shadow: 0 0 10px red;
+  transform: scale(1.1);
+}

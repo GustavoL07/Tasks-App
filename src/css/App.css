@@ -1,0 +1,72 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+:root {
+  --bg-col: rgb(240, 240, 240);
+  --app-col: navy;
+  --gray: rgb(85, 85, 85);
+  --light-gray: rgba(247, 247, 247, 0.75);
+  --completed-col: rgb(52, 185, 61);
+}
+
+button {
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: black;
+  background-color: var(--bg-col);
+
+  border: none;
+  border-radius: 5px;
+  padding: 3px 5px 3px 5px;
+  transition: 0.3s ease;
+}
+
+.config-btn:hover {
+  background-color: hsla(0, 100%, 0%, 0.5);
+  box-shadow: 0 0 3px hsla(0, 100%, 0%, 0.5);
+}
+
+.task-btn {
+  color: white;
+  background-color: navy;
+}
+
+.task-btn:hover {
+  background-color: rgb(0, 0, 192);
+  box-shadow: 0 0 5px rgb(0, 0, 192);
+}
+
+.task-list-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-list-container ul {
+  width: 75%;
+  overflow: hidden;
+  list-style: none;
+}
+
+.dialog-btn {
+  display: flex;
+  margin-top: 10px;
+}
+
+.dialog-btn .edit {
+  color: white;
+  background-color: navy;
+  width: 100%;
+}
+
+.dialog-btn .edit:hover {
+  background-color: rgb(0, 0, 192);
+  box-shadow: 0 0 5px rgb(0, 0, 192);
+}

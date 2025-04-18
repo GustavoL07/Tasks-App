@@ -1,0 +1,45 @@
+.text-input,
+.text-description,
+.date-input,
+.category-select {
+  color: black;
+  background-color: white;
+  padding: 8px;
+  font-size: 15px;
+
+  border: 2px solid lightgray;
+  border-radius: 5px;
+
+  box-sizing: border-box;
+}
+
+.text-description {
+  resize: none;
+  height: 100px;
+  overflow-y: auto;
+}
+
+.text-input:focus,
+.text-description:focus,
+.date-input:focus,
+.category-select:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  outline: none;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 5px;
+
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input-container #date-container {
+  display: flex;
+  gap: 5px;
+}
