@@ -58,7 +58,8 @@ export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue)
       case "category":
         return (a.category || 0).localeCompare(b.category || 0);
       case "completed":
-        return b.completed - a.completed;
+        if (a.completed === b.completed) return 0;
+        else return a.completed ? -1 : 0;
 
       default:
         return 0;

@@ -1,5 +1,5 @@
 import "../css/TaskItem.css";
-export default function TaskItem({ task, onDetailsClick, openDeleteDialog, toggleValue, onToggleComplete }) {
+export default function TaskItem({ task, onDetailsClick, openDeleteDialog, onToggleComplete }) {
   if (!task) return;
   return (
     <>
@@ -36,7 +36,6 @@ export default function TaskItem({ task, onDetailsClick, openDeleteDialog, toggl
                 <input
                   type="checkbox"
                   className="completed-checkbox"
-                  value={toggleValue}
                   onClick={onToggleComplete}
                 />
               </div>
