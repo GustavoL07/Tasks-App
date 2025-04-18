@@ -182,8 +182,7 @@ export default function App() {
         onSearchValueChange={setSearchValue}
         addTaskOnClick={() => addTaskDialogRef.current.showModal()}
         sortValue={sortMethod}
-        onSortChange={setSortMethod}
-      ></Header>
+        onSortChange={setSortMethod}></Header>
 
       <FeedbackMsg
         text={feedbackMsg.text}
@@ -206,7 +205,10 @@ export default function App() {
                 taskDeleteDialogRef.current.showModal();
               }}
               toggleValue={toggleValue}
-              onToggleComplete={() => {toggleTaskCompleted(index); setToggleValue(!toggleValue)}}
+              onToggleComplete={() => {
+                toggleTaskCompleted(index);
+                setToggleValue(!toggleValue);
+              }}
             />
           ))}
         </ul>
