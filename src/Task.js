@@ -1,4 +1,3 @@
-/* TASK.js */
 import { getFormattedDay } from "./utils.js";
 import { getFormattedHour } from "./utils.js";
 

@@ -20,6 +20,7 @@ export default function App() {
 
   const [sortMethod, setSortMethod] = useState("");
   const [searchValue, setSearchValue] = useState("");
+  const [toggleValue, setToggleValue] = useState(false);
 
   const [feedbackMsg, showFeedbackMsg] = useFeedbackMsg();
 
@@ -204,7 +205,8 @@ export default function App() {
                 setSelectedTask(task);
                 taskDeleteDialogRef.current.showModal();
               }}
-              onToggleComplete={() => toggleTaskCompleted(index)}
+              toggleValue={toggleValue}
+              onToggleComplete={() => {toggleTaskCompleted(index); setToggleValue(!toggleValue)}}
             />
           ))}
         </ul>

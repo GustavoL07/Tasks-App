@@ -55,12 +55,15 @@ export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue)
         return parseDate(a.dueTo || Infinity) - parseDate(b.dueTo || Infinity);
       case "due-date-late":
         return parseDate(b.dueTo || 0) - parseDate(a.dueTo || 0);
+      case "category":
+        return (a.category || 0).localeCompare(b.category || 0);
+      case "completed":
+        return b.completed - a.completed;
 
       default:
         return 0;
     }
   });
-
   return {
     taskList: sortedTasks,
     selectedTask,
