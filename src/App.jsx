@@ -10,6 +10,7 @@ import TaskDeletion from "./components/TaskDeletion.jsx";
 import FeedbackMsg from "./components/FeedbackMsg.jsx";
 import TaskDialog from "./components/TaskDialog.jsx";
 import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx"; 
 import "./css/App.css";
 
 export default function App() {
@@ -214,6 +215,11 @@ export default function App() {
         />
       </TaskDialog>
 
+      <FeedbackMsg
+        text={feedbackMsg.text}
+        type={feedbackMsg.type}
+      />
+
       {/* HEADER */}
       <Header
         title={"Tasks App"}
@@ -222,11 +228,6 @@ export default function App() {
         addTaskOnClick={() => addTaskDialogRef.current.showModal()}
         sortValue={sortMethod}
         onSortChange={setSortMethod}></Header>
-
-      <FeedbackMsg
-        text={feedbackMsg.text}
-        type={feedbackMsg.type}
-      />
 
       <div className="task-list-container">
         <ul>
@@ -247,6 +248,8 @@ export default function App() {
           ))}
         </ul>
       </div>
+
+      <Footer taskList={taskList}/>
     </>
   );
 }

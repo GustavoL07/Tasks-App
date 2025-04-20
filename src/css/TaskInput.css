@@ -2,13 +2,12 @@
 .text-description,
 .date-input,
 .category-select {
-  color: black;
-  background-color: white;
+  color: rgb(0, 0, 0);
   padding: 8px;
   font-size: 15px;
 
   border: 2px solid lightgray;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 
   box-sizing: border-box;
 }

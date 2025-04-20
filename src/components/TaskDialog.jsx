@@ -8,11 +8,13 @@ const TaskDialog = forwardRef(({ title, children, onClose }, ref) => {
 
       {children}
 
-      <button
-        className="close"
-        onClick={onClose}>
-        Close
-      </button>
+      <div className="btn-container">
+        <button
+          className="close"
+          onClick={onClose}>
+          Close
+        </button>
+      </div>
     </dialog>
   );
 });

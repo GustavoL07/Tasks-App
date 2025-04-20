@@ -27,5 +27,9 @@ dialog .close {
 
 dialog .close:hover {
   background-color: red;
-  box-shadow: 0 0 5px red;
+  box-shadow: 0 0 var(--border-radius) red;
+}
+
+dialog .btn-container{
+  display: flex;
 }

@@ -1,0 +1,42 @@
+.footer {
+  background-color: #282c34;
+  color: white;
+  padding: var(--border-radius);
+
+  width: 100%;
+  height: 1px;
+  position: fixed;
+  bottom: 0;
+  content-visibility: hidden;
+  overflow: hidden;
+  transition : height 0.3s ease-in-out;
+}
+
+.footer .title{
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--secondary-col);
+}
+
+.footer .text{
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--secondary-col);
+}
+
+.footer:hover {
+  height: 25vh;
+  content-visibility: auto;
+  box-shadow: 0 0 var(--border-radius) rgba(0, 0, 0, 0.9);
+}
+
+.footer-content{
+  display: flex;
+  justify-content: space-evenly;
+  gap: var(--gap);
+}
+
+.footer-content .flex {
+  display: flex;
+  flex-direction: column;
+}

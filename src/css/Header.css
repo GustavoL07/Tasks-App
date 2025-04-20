@@ -1,11 +1,12 @@
 .header-title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 900;
   text-align: center;
   margin: 5px;
+  color: var(--primary-col);
 }
 
-.header-container{
+.header-container {
   display: flex;
   gap: 5px;
   justify-content: center;

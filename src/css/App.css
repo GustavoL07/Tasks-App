@@ -7,11 +7,23 @@
 }
 
 :root {
-  --bg-col: rgb(240, 240, 240);
-  --app-col: navy;
+  --bg-col: rgb(247, 247, 247);
+  --primary-col: #000080;
+  --secondary-col: orange;
   --gray: rgb(85, 85, 85);
   --light-gray: rgba(247, 247, 247, 0.75);
   --completed-col: rgb(52, 185, 61);
+
+  --px: 8px;
+  --py: 4px;
+  --border-radius: 10px;
+  --gap: 5px
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--bg-col);
 }
 
 button {
@@ -22,9 +34,13 @@ button {
   background-color: var(--bg-col);
 
   border: none;
-  border-radius: 5px;
-  padding: 3px 5px 3px 5px;
+  border-radius: var(--border-radius);
+  padding: var(--py) var(--px) var(--py) var(--px);
   transition: 0.3s ease;
+}
+
+button:hover {
+  box-shadow: 0 0 var(--border-radius) var(--primary-col);
 }
 
 .config-btn:hover {
@@ -34,12 +50,11 @@ button {
 
 .task-btn {
   color: white;
-  background-color: navy;
+  background-color: var(--primary-col);
 }
 
 .task-btn:hover {
   background-color: rgb(0, 0, 192);
-  box-shadow: 0 0 5px rgb(0, 0, 192);
 }
 
 .task-list-container {

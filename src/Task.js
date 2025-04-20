@@ -1,4 +1,4 @@
-import { getFormattedDay, getFormattedHour } from "./utils.js";
+import { getFormattedDay, getFormattedHour, parseDate } from "./utils.js";
 import { v4 as uniqueID } from "uuid";
 
 class Task {
@@ -20,6 +20,14 @@ class Task {
     shopping: "Shopping",
     other: "Other",
   };
+
+  static getSoonestTask(a, b) {
+    return (a.dueTo ? parseDate(a.dueTo) : Infinity) - (b.dueTo ? parseDate(b.dueTo) : Infinity);
+  }
+
+  static getLatestTask(a, b) {
+    return (b.dueTo ? parseDate(b.dueTo) : 0) - (a.dueTo ? parseDate(a.dueTo) : 0);
+  }
 
   constructor(name, description = "", dueTo = null, classification = { category: "", type: "" }, completed = false) {
     this.id = uniqueID();

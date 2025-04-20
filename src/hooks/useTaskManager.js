@@ -74,12 +74,10 @@ export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue)
         return b.name.localeCompare(a.name);
 
       case "due-date-soon":
-        return (
-          (a.dueTo ? parseDate(a.dueTo) : Infinity) - (b.dueTo ? parseDate(b.dueTo) : Infinity)
-        );
+        return Task.getSoonestTask(a, b);
 
       case "due-date-late":
-        return (b.dueTo ? parseDate(b.dueTo) : 0) - (a.dueTo ? parseDate(a.dueTo) : 0);
+        return Task.getLatestTask(a, b);
 
       case "category":
         if (a.completed && !b.completed) return 1;
