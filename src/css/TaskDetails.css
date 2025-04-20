@@ -6,11 +6,11 @@
 
 .task-completed {
   font-size: 1.3rem;
-  font-weight: 650;
+  font-weight: var(--font-weight-1);
   text-align: center;
   color: var(--completed-col);
   background-color: var(--light-gray);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   margin-bottom: 5px;
 }
 
@@ -21,7 +21,7 @@
 
 .details-name {
   font-size: 1.75rem;
-  font-weight: 800;
+  font-weight: var(--font-weight-3);
   color: navy;
   text-align: center;
   margin: 5px 5px;
@@ -29,7 +29,7 @@
 
 .creation {
   font-size: 0.9rem;
-  font-weight: 750;
+  font-weight: var(--font-weight-2);
   color: rgb(165, 165, 165);
 }
 
@@ -40,7 +40,7 @@
 .creation-c {
   text-align: center;
   font-size: 0.9rem;
-  font-weight: 750;
+  font-weight: var(--font-weight-1);
   color: rgb(165, 165, 165);
 }
 
@@ -56,18 +56,23 @@
 #category {
   color: black;
   font-size: 1.4rem;
+  font-weight: var(--font-weight-3);
   background-color: rgba(240, 240, 240, 0.35);
   border-radius: 5px;
 }
 
 .description {
   background-color: rgba(240, 240, 240, 0.35);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   padding: 5px;
 }
 
-.classification-type{
+.description p{
+  font-weight: var(--font-weight-1);
+}
+
+.classification-type {
   font-size: 1.25rem;
-  font-weight: 750;
+  font-weight: var(--font-weight-3);
   color: black;
 }

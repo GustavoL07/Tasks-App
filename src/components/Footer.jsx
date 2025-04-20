@@ -19,20 +19,24 @@ export default function Footer({ taskList, title = "Current Progress" }) {
 
   return (
     <footer className="footer">
-      <p className="title">{title}</p>
+      <p className="important">
+        {title}: {completedPercentage}%
+      </p>
       <div className="footer-content">
         <div>
           <p>
-            You have {listLength} tasks in total, {completedTasks} completed, and {remainingTasks}{" "}
-            remaining.
-          </p>
-          <p>
-            Completion Rate: <span className="text">{completedPercentage}%</span>
+            <p className="footer-text">You have {listLength} tasks in total.</p> 
+            <p className="footer-text">{completedTasks} completed</p>
+            <p className="footer-text">{remainingTasks} remaining</p>
           </p>
         </div>
         <div>
-          <p>Soonest : {soonestTask.name} - {soonestTask.dueTo}</p>
-          <p>Latest  : {latestTask.name} - {latestTask.dueTo}</p>
+          <p className="footer-text">
+            Soonest : {soonestTask.name} - {soonestTask.dueTo}
+          </p>
+          <p className="footer-text">
+            Latest : {latestTask.name} - {latestTask.dueTo}
+          </p>
         </div>
       </div>
     </footer>
