@@ -1,12 +1,6 @@
 import { useState } from "react";
 import Task from "../Task";
-import {
-  getFormattedDay,
-  getFormattedHour,
-  formatDueToValue,
-  parseDate,
-  randomTaskGenerator,
-} from "../utils";
+import { getFormattedDay, getFormattedHour, formatDueToValue, randomTaskGenerator } from "../utils";
 
 export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue) {
   const [taskList, setTaskList] = useState([]);
@@ -79,12 +73,12 @@ export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue)
       case "due-date-late":
         return Task.getLatestTask(a, b);
 
-      case "category":
+      case "priority":
         if (a.completed && !b.completed) return 1;
         if (!a.completed && b.completed) return -1;
 
-        return (a.classification?.category?.toLowerCase() || "zzz").localeCompare(
-          b.classification?.category?.toLowerCase() || "zzz"
+        return (a.classification?.priority?.toLowerCase() || "zzz").localeCompare(
+          b.classification?.priority?.toLowerCase() || "zzz"
         );
 
       case "type":

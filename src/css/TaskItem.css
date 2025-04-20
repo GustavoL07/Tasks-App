@@ -49,7 +49,7 @@ li:last-child {
   transition: color 0.3s ease;
 }
 
-.category {
+.priority {
   font-size: 1.2rem;
   font-weight: var(--font-weight-1);
   background-color: rgba(240, 240, 240, 0.35);
@@ -58,7 +58,7 @@ li:last-child {
   text-align: center;
 }
 
-.category.completed {
+.priority.completed {
   color: var(--completed-col);
 }
 

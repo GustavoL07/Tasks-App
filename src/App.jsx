@@ -1,28 +1,23 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useTaskManager from "./hooks/useTaskManager.js";
 import { useFeedbackMsg } from "./hooks/useFeedbackMsg.js";
 import { formatDueToValue } from "./utils.js";
+import { useDialogs } from "./hooks/useDialogs.js";
+import { useTaskValues } from "./hooks/taskValues.js";
 
-import TaskInput from "./components/TaskInput.jsx";
 import TaskItem from "./components/TaskItem.jsx";
-import TaskDetails from "./components/TaskDetails.jsx";
-import TaskDeletion from "./components/TaskDeletion.jsx";
 import FeedbackMsg from "./components/FeedbackMsg.jsx";
-import TaskDialog from "./components/TaskDialog.jsx";
 import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx"; 
+import Footer from "./components/Footer.jsx";
+import Dialogs from "./components/Dialogs.jsx";
 import "./css/App.css";
 
 export default function App() {
-  const addTaskDialogRef = useRef(null);
-  const taskDetailsDialogRef = useRef(null);
-  const taskDeleteDialogRef = useRef(null);
-  const taskEditDialogRef = useRef(null);
-
   const [sortMethod, setSortMethod] = useState("");
   const [searchValue, setSearchValue] = useState("");
-
   const [feedbackMsg, showFeedbackMsg] = useFeedbackMsg();
+  const { addTaskDialogRef, taskDetailsDialogRef, taskDeleteDialogRef, taskEditDialogRef } =
+    useDialogs();
 
   const {
     taskList,
@@ -36,17 +31,31 @@ export default function App() {
     deleteAllTasks,
   } = useTaskManager(showFeedbackMsg, sortMethod, searchValue);
 
-  const [taskInputValue, setTaskInputValue] = useState("");
-  const [taskDescriptionValue, setTaskDescriptionValue] = useState("");
-  const [taskDueToValue, setTaskDueToValue] = useState(null);
-  const [taskCategory, setTaskCategory] = useState("");
-  const [taskType, setTaskType] = useState("");
+  const {
+    taskInputValue,
+    setTaskInputValue,
+    taskDescriptionValue,
+    setTaskDescriptionValue,
+    taskDueToValue,
+    setTaskDueToValue,
+    taskCategory,
+    setTaskCategory,
+    taskType,
+    setTaskType,
+    taskEditedInputValue,
+    setTaskEditedInputValue,
+    taskEditedDescriptionValue,
+    setTaskEditedDescriptionValue,
+    taskEditedDueToValue,
+    setTaskEditedDueToValue,
+    taskEditedCategoryValue,
+    setTaskEditedCategoryValue,
+    taskEditedTypeValue,
+    setTaskEditedTypeValue,
 
-  const [taskEditedInputValue, setTaskEditedInputValue] = useState("");
-  const [taskEditedDescriptionValue, setTaskEditedDescriptionValue] = useState("");
-  const [taskEditedDueToValue, setTaskEditedDueToValue] = useState(null);
-  const [taskEditedCategoryValue, setTaskEditedCategoryValue] = useState("");
-  const [taskEditedTypeValue, setTaskEditedTypeValue] = useState("");
+    resetTaskValues,
+    resetTaskEditedValues,
+  } = useTaskValues();
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -56,6 +65,8 @@ export default function App() {
         deleteAllTasks();
       } else if (event.key === "*") {
         console.log(taskList);
+      } else if (event.key === ".") {
+        console.log(selectedTask);
       }
     };
 
@@ -70,7 +81,7 @@ export default function App() {
     if (!taskInputValue.trim()) return;
 
     addTask(taskInputValue, taskDescriptionValue, taskDueToValue, {
-      category: taskCategory,
+      priority: taskCategory,
       type: taskType,
     });
 
@@ -85,135 +96,67 @@ export default function App() {
       name: taskEditedInputValue,
       description: taskEditedDescriptionValue,
       dueTo: formatDueToValue(taskEditedDueToValue),
-      classification: { category: taskEditedCategoryValue, type: taskEditedTypeValue },
+      classification: { priority: taskEditedCategoryValue, type: taskEditedTypeValue },
     });
 
     resetTaskEditedValues();
     taskEditDialogRef.current.close();
   }
 
-  function resetTaskValues() {
-    setTaskInputValue("");
-    setTaskDescriptionValue("");
-    setTaskDueToValue(null);
-    setTaskCategory("");
-    setTaskType("");
-  }
-
-  function resetTaskEditedValues() {
-    setTaskEditedInputValue("");
-    setTaskEditedDescriptionValue("");
-    setTaskEditedDueToValue(null);
-    setTaskEditedCategoryValue("");
-    setTaskEditedTypeValue("");
-  }
-
-  function openEditDialog() {
-    taskEditDialogRef.current.showModal();
-
-    setTaskEditedInputValue("");
-    setTaskEditedDescriptionValue("");
-    setTaskEditedDueToValue(null);
-    setTaskEditedCategoryValue("");
-  }
-
   return (
     <>
-      {/* NEW TASK */}
-      <TaskDialog
-        ref={addTaskDialogRef}
-        title="New Task"
-        onClose={() => {
-          addTaskDialogRef.current.close();
-          setTaskInputValue("");
-          setTaskDescriptionValue("");
-          setTaskDueToValue(null);
-          setTaskCategory("");
-        }}>
-        <TaskInput
-          nameValue={taskInputValue}
-          descriptionValue={taskDescriptionValue}
-          dueToValue={taskDueToValue}
-          categoryValue={taskCategory}
-          typeValue={taskType}
-          nameOnChange={setTaskInputValue}
-          descriptionOnChange={setTaskDescriptionValue}
-          dueToOnChange={setTaskDueToValue}
-          categoryOnChange={setTaskCategory}
-          typeOnChange={setTaskType}
-          labelText={{
+      <Dialogs
+        addTaskDialogRef={addTaskDialogRef}
+        taskDetailsDialogRef={taskDetailsDialogRef}
+        taskDeleteDialogRef={taskDeleteDialogRef}
+        taskEditDialogRef={taskEditDialogRef}
+        taskInputProps={{
+          nameValue: taskInputValue,
+          descriptionValue: taskDescriptionValue,
+          dueToValue: taskDueToValue,
+          categoryValue: taskCategory,
+          typeValue: taskType,
+          nameOnChange: setTaskInputValue,
+          descriptionOnChange: setTaskDescriptionValue,
+          dueToOnChange: setTaskDueToValue,
+          categoryOnChange: setTaskCategory,
+          typeOnChange: setTaskType,
+          labelText: {
             name: "Task Name",
             description: "Task Description",
             dueDate: "Due Date",
             btnText: "Add Task",
-          }}
-          onSubmit={handleAddTask}
-        />
-      </TaskDialog>
-
-      {/* TASK DETAILS */}
-      <TaskDialog
-        ref={taskDetailsDialogRef}
-        title="Task Details"
-        onClose={() => taskDetailsDialogRef.current.close()}>
-        <TaskDetails task={selectedTask} />
-        {!selectedTask?.completed && (
-          <div className="dialog-btn">
-            <button
-              className="edit"
-              onClick={() => {
-                taskDetailsDialogRef.current.close();
-                openEditDialog();
-              }}>
-              Edit
-            </button>
-          </div>
-        )}
-      </TaskDialog>
-
-      {/* EDIT TASK */}
-      <TaskDialog
-        ref={taskEditDialogRef}
-        title="Edit Task"
-        onClose={() => {
-          taskEditDialogRef.current.close();
-          setTaskEditedInputValue("");
-          setTaskEditedDescriptionValue("");
-          setTaskEditedDueToValue(null);
-        }}>
-        <TaskInput
-          nameValue={taskEditedInputValue}
-          descriptionValue={taskEditedDescriptionValue}
-          dueToValue={taskEditedDueToValue}
-          categoryValue={taskEditedCategoryValue}
-          typeValue={taskEditedTypeValue}
-          nameOnChange={setTaskEditedInputValue}
-          descriptionOnChange={setTaskEditedDescriptionValue}
-          dueToOnChange={setTaskEditedDueToValue}
-          categoryOnChange={setTaskEditedCategoryValue}
-          typeOnChange={setTaskEditedTypeValue}
-          labelText={{
+          },
+          onClose: resetTaskValues,
+        }}
+        taskEditProps={{
+          nameValue: taskEditedInputValue,
+          descriptionValue: taskEditedDescriptionValue,
+          dueToValue: taskEditedDueToValue,
+          categoryValue: taskEditedCategoryValue,
+          typeValue: taskEditedTypeValue,
+          nameOnChange: setTaskEditedInputValue,
+          descriptionOnChange: setTaskEditedDescriptionValue,
+          dueToOnChange: setTaskEditedDueToValue,
+          categoryOnChange: setTaskEditedCategoryValue,
+          typeOnChange: setTaskEditedTypeValue,
+          labelText: {
             name: "New Name",
             description: "New Description",
             dueDate: "New Date",
             btnText: "Save Changes",
-          }}
-          onSubmit={handleEditTask}
-        />
-      </TaskDialog>
-
-      {/* DELETE TASK */}
-      <TaskDialog
-        ref={taskDeleteDialogRef}
-        onClose={() => taskDeleteDialogRef.current.close()}>
-        <TaskDeletion
-          task={selectedTask}
-          onClickDelete={() => {
-            deleteTask(selectedTask.id);
-            taskDeleteDialogRef.current.close();
-          }}
-        />
-      </TaskDialog>
+          },
+          onClose: resetTaskEditedValues,
+        }}
+        selectedTask={selectedTask}
+        handleAddTask={handleAddTask}
+        handleEditTask={handleEditTask}
+        deleteTask={deleteTask}
+        openEditDialog={() => {
+          taskEditDialogRef.current.showModal();
+          resetTaskEditedValues();
+        }}
+      />
 
       <FeedbackMsg
         text={feedbackMsg.text}
@@ -227,7 +170,8 @@ export default function App() {
         onSearchValueChange={setSearchValue}
         addTaskOnClick={() => addTaskDialogRef.current.showModal()}
         sortValue={sortMethod}
-        onSortChange={setSortMethod}></Header>
+        onSortChange={setSortMethod}
+      />
 
       <div className="task-list-container">
         <ul>
@@ -249,7 +193,7 @@ export default function App() {
         </ul>
       </div>
 
-      <Footer taskList={taskList}/>
+      <Footer taskList={taskList} />
     </>
   );
 }

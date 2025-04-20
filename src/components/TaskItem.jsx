@@ -24,14 +24,14 @@ export default function TaskItem({ task, onDetailsClick, openDeleteDialog, onTog
           </div>
 
           <div className="options">
-            {task.classification.category && (
-              <p className={`category ${task.completed ? "completed" : ""}`}>
-                {task.completed ? "Completed!" : task.classification.category}
+            {task.classification.priority && (
+              <p className={`priority ${task.completed ? "completed" : ""}`}>
+                {task.completed ? "Completed!" : task.classification.priority}
               </p>
             )}
-            {task.completed && !task.classification.category && (
-              <p className={`category ${task.completed ? "completed" : ""}`}>
-                {task.completed ? "Completed!" : task.classification.category}
+            {task.completed && !task.classification.priority && (
+              <p className={`priority ${task.completed ? "completed" : ""}`}>
+                {task.completed ? "Completed!" : task.classification.priority}
               </p>
             )}
             <div id="flex">

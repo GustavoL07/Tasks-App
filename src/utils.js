@@ -32,7 +32,7 @@ export function parseDate(dateStr) {
 
 export function randomTaskGenerator(completed) {
   function getRandomClassification() {
-    const categoriesArr = Object.entries(Task.category).map(([key, value]) => {
+    const categoriesArr = Object.entries(Task.priority).map(([key, value]) => {
       return [key, value];
     });
     const randomCategoriesIndex = Math.floor(Math.random() * categoriesArr.length);
@@ -43,7 +43,7 @@ export function randomTaskGenerator(completed) {
     const randomTypesIndex = Math.floor(Math.random() * typesArr.length);
 
     return {
-      category: categoriesArr[randomCategoriesIndex][1],
+      priority: categoriesArr[randomCategoriesIndex][1],
       type: typesArr[randomTypesIndex][1],
     };
   }

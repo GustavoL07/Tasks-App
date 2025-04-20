@@ -1,7 +1,6 @@
 .footer {
   color: var(--text-col);
   padding: var(--border-radius);
-  margin: 0;
   background-color: var(--footer-bg-col);
   border: 1px solid var(--footer-border-col);
   font-weight: var(--font-weight-1);
@@ -45,4 +44,10 @@
 .footer-content .flex {
   display: flex;
   flex-direction: column;
+}
+
+.important .completed{
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--completed-col);
 }

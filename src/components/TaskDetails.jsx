@@ -12,11 +12,11 @@ export default function TaskDetails({ task }) {
       )}
 
       <div>
-        {task.classification?.category && !task.completed && (
+        {task.classification?.priority && !task.completed && (
           <p
             className="creation-c"
-            id="category">
-            {task.classification.category}
+            id="priority">
+            {task.classification.priority}
           </p>
         )}
 

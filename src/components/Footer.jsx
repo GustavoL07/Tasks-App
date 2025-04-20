@@ -19,24 +19,30 @@ export default function Footer({ taskList, title = "Current Progress" }) {
 
   return (
     <footer className="footer">
-      <p className="important">
-        {title}: {completedPercentage}%
-      </p>
+      <div>
+        {completedPercentage === 100 ? (
+          <p className="important">{title}: <span className="completed">100%</span></p>
+        ) : (
+          <p className="important">{title}: {completedPercentage}%</p>
+        )}
+      </div>
       <div className="footer-content">
         <div>
-          <p>
-            <p className="footer-text">You have {listLength} tasks in total.</p> 
-            <p className="footer-text">{completedTasks} completed</p>
-            <p className="footer-text">{remainingTasks} remaining</p>
-          </p>
+          <p className="footer-text">You have {listLength} tasks in total.</p>
+          <p className="footer-text">{completedTasks} completed</p>
+          <p className="footer-text">{remainingTasks} remaining</p>
         </div>
-        <div>
-          <p className="footer-text">
-            Soonest : {soonestTask.name} - {soonestTask.dueTo}
-          </p>
-          <p className="footer-text">
-            Latest : {latestTask.name} - {latestTask.dueTo}
-          </p>
+        <div className="soonest-latest">
+          {soonestTask.dueTo && (
+            <p className="footer-text">
+              Soonest : {soonestTask.name} - {soonestTask.dueTo}
+            </p>
+          )}
+          {latestTask.dueTo && (
+            <p className="footer-text">
+              Latest : {latestTask.name} - {latestTask.dueTo}
+            </p>
+          )}
         </div>
       </div>
     </footer>

@@ -63,26 +63,46 @@ export default function taskInput({
           <select
             id="SELECT-CATEGORY"
             name="SELECT-CATEGORY"
-            className="category-select"
+            className="priority-select"
             value={categoryValue}
             onChange={(e) => categoryOnChange(e.target.value)}>
-            <option key={Task.category.none} value={Task.category.none}>Category</option>
+            <option
+              key={Task.priority.none}
+              value={Task.priority.none}>
+              Priority
+            </option>
 
-            {Object.entries(Task.category).map(([key, value]) => {
-              return key === "none" ? null : <option key={key} value={value}>{value}</option>;
+            {Object.entries(Task.priority).map(([key, value]) => {
+              return key === "none" ? null : (
+                <option
+                  key={key}
+                  value={value}>
+                  {value}
+                </option>
+              );
             })}
           </select>
 
           <select
             id="SELECT-TYPE"
             name="SELECT-TYPE"
-            className="category-select"
+            className="priority-select"
             value={typeValue}
             onChange={(e) => typeOnChange(e.target.value)}>
-            <option key={Task.type.none} value={Task.type.none}>Type</option>
+            <option
+              key={Task.type.none}
+              value={Task.type.none}>
+              Type
+            </option>
 
             {Object.entries(Task.type).map(([key, value]) => {
-              return key === "none" ? null : <option key={key} value={value}>{value}</option>
+              return key === "none" ? null : (
+                <option
+                  key={key}
+                  value={value}>
+                  {value}
+                </option>
+              );
             })}
           </select>
         </div>

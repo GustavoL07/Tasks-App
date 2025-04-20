@@ -1,7 +1,7 @@
 .text-input,
 .text-description,
 .date-input,
-.category-select {
+.priority-select {
   color: rgb(0, 0, 0);
   padding: 8px;
   font-size: 15px;
@@ -21,7 +21,7 @@
 .text-input:focus,
 .text-description:focus,
 .date-input:focus,
-.category-select:focus {
+.priority-select:focus {
   border-color: #3498db;
   box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
   outline: none;

@@ -2,7 +2,7 @@ import { getFormattedDay, getFormattedHour, parseDate } from "./utils.js";
 import { v4 as uniqueID } from "uuid";
 
 class Task {
-  static category = {
+  static priority = {
     none: "",
     urgent: "Urgent",
     important: "Important",
@@ -29,7 +29,13 @@ class Task {
     return (b.dueTo ? parseDate(b.dueTo) : 0) - (a.dueTo ? parseDate(a.dueTo) : 0);
   }
 
-  constructor(name, description = "", dueTo = null, classification = { category: "", type: "" }, completed = false) {
+  constructor(
+    name,
+    description = "",
+    dueTo = null,
+    classification = { priority: "", type: "" },
+    completed = false
+  ) {
     this.id = uniqueID();
 
     this.name = name;
