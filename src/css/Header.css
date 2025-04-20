@@ -3,7 +3,7 @@
   font-weight: var(--font-weight-4);
   text-align: center;
   margin: 5px;
-  color: var(--primary-col);
+  color: var(--header-title-col);
 }
 
 .header-container {

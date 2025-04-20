@@ -2,12 +2,13 @@
 .text-description,
 .date-input,
 .priority-select {
-  color: rgb(0, 0, 0);
+  color: var(--text-col);
   padding: 8px;
   font-size: 15px;
 
-  border: 2px solid lightgray;
+  border: 2px solid var(--input-border-col);
   border-radius: var(--border-radius);
+  background-color: var(--inputs-bg-col);
 
   box-sizing: border-box;
 }
@@ -22,8 +23,8 @@
 .text-description:focus,
 .date-input:focus,
 .priority-select:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  border-color: var(--primary-col-hover);
+  box-shadow: 0 0 var(--border-radius) rgba(52, 152, 219, 0.5);
   outline: none;
 }
 
@@ -31,9 +32,9 @@
   display: flex;
   flex-direction: column;
   padding: 5px;
-  gap: 5px;
+  gap: var(--gap);
 
-  background-color: #f9f9f9;
+  background-color: none;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }

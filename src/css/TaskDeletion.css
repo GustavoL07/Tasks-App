@@ -24,6 +24,7 @@
 }
 
 .delete-btn {
+  color: var(--text-col);
   font-size: 1.5rem;
   background-color: rgb(238, 92, 92);
   transition: transform 0.2 ease;
@@ -31,6 +32,17 @@
 
 .delete-btn:hover {
   background-color: red;
-  box-shadow: 0 0 var(--border-radius) red;
-  transform: scale(1.1);
+  box-shadow: 0 0 calc(var(--border-radius)*1.5) red;
+  transform: scale(1.15);
+}
+
+.small-delete-btn{
+  color: var(--text-col);
+  background-color: rgb(238, 92, 92);
+  transition: transform 0.2 ease;
+}
+
+.small-delete-btn:hover {
+  background-color: red;
+  box-shadow: 0 0 calc(var(--border-radius)*1.1) red;
 }

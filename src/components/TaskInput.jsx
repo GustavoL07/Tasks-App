@@ -58,6 +58,7 @@ export default function taskInput({
             dateFormat="dd/MM/yyyy"
             placeholderText={labelText.dueDate}
             showPopperArrow={false}
+            autoComplete="off"
           />
 
           <select
@@ -111,7 +112,7 @@ export default function taskInput({
           id="BUTTON"
           name="BUTTON"
           type="submit"
-          className="task-btn">
+          className={labelText.btnClass}>
           {labelText.btnText}
         </button>
       </div>

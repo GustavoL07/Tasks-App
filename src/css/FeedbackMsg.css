@@ -3,8 +3,8 @@
   font-size: 1.35rem;
   font-weight: 800;
   text-align: center;
-  border-radius: var(--border-radius);
-  color: black;
+  border-radius: calc(var(--border-radius)*1.75);
+  color: var(--text-col);
 
   position: fixed;
   left: 50%;
@@ -20,27 +20,27 @@
 .feedback-msg.default {
   color: var(--text-col);
   border: var(--border) solid #ccc;
-  box-shadow: 0 0 var(--border-radius) #ccc;
+  box-shadow: 0 0 calc(var(--border-radius)*1.75) #ccc;
 }
 
 .feedback-msg.add {
   border: var(--border) solid var(--primary-col);
-  box-shadow: 0 0 var(--border-radius) navy;
+  box-shadow: 0 0 calc(var(--border-radius)*1.75) blue;
 }
 
 .feedback-msg.delete {
-  border: var(--border) solid #e53935;
-  box-shadow: 0 0 var(--border-radius) #e53935;
+  border: var(--border) solid red;
+  box-shadow: 0 0 calc(var(--border-radius)*1.75) red;
 }
 
 .feedback-msg.completed {
   border: var(--border) solid var(--completed-col);
-  box-shadow: 0 0 var(--border-radius) var(--completed-col);
+  box-shadow: 0 0 calc(var(--border-radius)*1.75) var(--completed-col);
 }
 
 .feedback-msg.edited {
-  border: var(--border) solid var(--completed-col);
-  box-shadow: 0 0 var(--border-radius) var(--completed-col);
+  border: var(--border) solid var(--secondary-col);
+  box-shadow: 0 0 calc(var(--border-radius)*1.75) #ff8c00;
 }
 
 @keyframes fadeInOut {

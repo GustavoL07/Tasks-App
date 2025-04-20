@@ -1,7 +1,7 @@
 import "../css/Footer.css";
 import Task from "../Task.js";
 
-export default function Footer({ taskList, title = "Current Progress" }) {
+export default function Footer({ taskList, theme, title = "Current Progress" }) {
   if (taskList.length === 0) return;
 
   const listLength = taskList.length;
@@ -21,9 +21,13 @@ export default function Footer({ taskList, title = "Current Progress" }) {
     <footer className="footer">
       <div>
         {completedPercentage === 100 ? (
-          <p className="important">{title}: <span className="completed">100%</span></p>
+          <p className="important">
+            {title}: <span className="completed">100%</span>
+          </p>
         ) : (
-          <p className="important">{title}: {completedPercentage}%</p>
+          <p className="important">
+            {title}: {completedPercentage}%
+          </p>
         )}
       </div>
       <div className="footer-content">

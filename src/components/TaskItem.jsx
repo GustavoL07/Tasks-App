@@ -36,7 +36,7 @@ export default function TaskItem({ task, onDetailsClick, openDeleteDialog, onTog
             )}
             <div id="flex">
               <button
-                className="config-btn"
+                className="small-delete-btn"
                 onClick={(e) => {
                   e.stopPropagation();
                   openDeleteDialog();

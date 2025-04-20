@@ -9,25 +9,31 @@ dialog {
   border-radius: 15px;
   padding: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: rgb(255, 255, 255);
+  background-color: var(--dialog-bg-col);
   overflow: visible;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 dialog .title {
   text-align: center;
   font-size: 1.6rem;
+  color: var(--text-col);
   font-weight: 700;
   padding-bottom: 5px;
 }
 
 dialog .close {
+  color: var(--text-col);
   margin-top: 5px;
-  background-color: rgb(238, 92, 92);
+  background-color: rgb(235, 95, 95);
 }
 
 dialog .close:hover {
   background-color: red;
-  box-shadow: 0 0 var(--border-radius) red;
+  box-shadow: 0 0 calc(var(--border-radius)*1.5) red;
 }
 
 dialog .btn-container{

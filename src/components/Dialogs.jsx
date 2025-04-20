@@ -40,7 +40,7 @@ export default function Dialogs({
         {!selectedTask?.completed && (
           <div className="dialog-btn">
             <button
-              className="edit"
+              className="btn-edit"
               onClick={() => {
                 taskDetailsDialogRef.current.close();
                 openEditDialog();

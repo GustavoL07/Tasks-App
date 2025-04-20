@@ -19,6 +19,12 @@ export default function App() {
   const { addTaskDialogRef, taskDetailsDialogRef, taskDeleteDialogRef, taskEditDialogRef } =
     useDialogs();
 
+  const [theme, setTheme] = useState("light");
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   const {
     taskList,
     selectedTask,
@@ -67,6 +73,8 @@ export default function App() {
         console.log(taskList);
       } else if (event.key === ".") {
         console.log(selectedTask);
+      } else if (event.key === "!") {
+        setTheme(theme === "light" ? "dark" : "light");
       }
     };
 
@@ -126,8 +134,12 @@ export default function App() {
             description: "Task Description",
             dueDate: "Due Date",
             btnText: "Add Task",
+            btnClass: "action-btn",
           },
-          onClose: resetTaskValues,
+          onClose: () => {
+            resetTaskValues();
+            addTaskDialogRef.current.close();
+          },
         }}
         taskEditProps={{
           nameValue: taskEditedInputValue,
@@ -145,8 +157,12 @@ export default function App() {
             description: "New Description",
             dueDate: "New Date",
             btnText: "Save Changes",
+            btnClass: "action-btn",
           },
-          onClose: resetTaskEditedValues,
+          onClose: () => {
+            resetTaskEditedValues();
+            taskEditDialogRef.current.close();
+          },
         }}
         selectedTask={selectedTask}
         handleAddTask={handleAddTask}

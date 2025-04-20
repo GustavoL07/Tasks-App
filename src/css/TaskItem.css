@@ -11,19 +11,19 @@ li:last-child {
 .container {
   display: flex;
   justify-content: space-between;
-  background: white;
+  background-color: var(--item-bg-col);
   padding: 12px 16px;
   margin: 5px;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
   will-change: transform;
   cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
 .container:hover {
   transform: translateY(-2px);
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px calc(var(--border-radius) * 0.5) var(--item-border-hover-col);
 }
 
 .container.completed:hover {
@@ -46,13 +46,14 @@ li:last-child {
 .name {
   font-size: 1.65rem;
   font-weight: var(--font-weight-1);
+  color: var(--text-col);
   transition: color 0.3s ease;
 }
 
 .priority {
   font-size: 1.2rem;
   font-weight: var(--font-weight-1);
-  background-color: rgba(240, 240, 240, 0.35);
+  color: var(--text-col);
   border-radius: 5px;
   padding: 3px;
   text-align: center;
@@ -65,6 +66,7 @@ li:last-child {
 .dueTo {
   font-size: 1rem;
   font-weight: var(--font-weight-1);
+  color: var(--text-col);
   transition: color 0.2s ease;
 }
 
@@ -89,7 +91,6 @@ li:last-child {
 }
 
 .completed-checkbox {
-  --background-color: #fff;
   --checkbox-height: 25px;
 
   appearance: none;
@@ -97,12 +98,16 @@ li:last-child {
   height: var(--checkbox-height);
 
   background-color: transparent;
-  border: 3px solid #f0f0f0;
+  border: 3px solid var(--checkbox-border-col);
   border-radius: 5px;
 
   position: relative;
   cursor: pointer;
   transition: border-color 0.2s ease;
+}
+
+.completed-checkbox:hover{
+  border-color: var(--completed-col);
 }
 
 .completed-checkbox::before,
@@ -116,12 +121,15 @@ li:last-child {
   transform-origin: left top;
   border-radius: 5px;
   transition: opacity 0.5s ease;
+  opacity: 0;
+  box-shadow: none;
+  visibility: hidden
 }
 
 .completed-checkbox::before {
   top: calc(var(--checkbox-height) * 0.7);
   left: calc(var(--checkbox-height) * 0.4);
-  box-shadow: 0 0 0 calc(var(--checkbox-height) * 0.05) var(--background-color);
+  box-shadow: none;
   transform: rotate(-135deg);
 }
 
@@ -139,11 +147,15 @@ li:last-child {
 .completed-checkbox:checked::after {
   height: calc(var(--checkbox-height) / 2);
   animation: checkbox-bottom-check 0.2s ease forwards;
+  opacity: 1;
+  visibility: visible;
 }
 
 .completed-checkbox:checked::before {
   height: calc(var(--checkbox-height) * 1.2);
   animation: checkbox-top-check 0.4s ease forwards;
+  opacity: 1;
+  visibility: visible;
 }
 
 @keyframes checkbox-bottom-check {

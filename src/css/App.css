@@ -4,15 +4,29 @@
   font-family: "Nunito", sans-serif;
   font-weight: var(--font-weight-1);
   font-size: 16px;
+
+  transition: all 0.3s ease;
 }
 
-:root {
+:root[data-theme="light"] {
   --bg-col: rgb(247, 247, 247);
   --primary-col: #000080;
+  --primary-col-hover: rgb(0, 0, 192);
   --secondary-col: orange;
   --gray: rgb(85, 85, 85);
   --light-gray: rgba(247, 247, 247, 0.75);
   --completed-col: rgb(52, 185, 61);
+  --header-title-col: #000080;
+
+  --item-bg-col: #ffffff;
+  --item-border-hover-col: rgba(0, 0, 0, 0.392);
+  --inputs-bg-col: #ffffff;
+  --dialog-bg-col: #ffffff;
+  --input-border-col: #e0e0e0;
+  --details-name-col: blue;
+  --action-btn-col: navy;
+  --action-btn-col-hover: rgb(0, 68, 255);
+  --checkbox-border-col: #e0e0e0;
 
   --text-col: #000000;
   --font-weight-1: 700;
@@ -29,11 +43,46 @@
   --gap: 5px;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-  background-color: var(--bg-col);
+:root[data-theme="dark"] {
+  --bg-col: #121212;
+  --primary-col: #000080;
+  --primary-col-hover: rgb(0, 0, 255);
+  --secondary-col: orange;
+  --gray: #888888;
+  --light-gray: rgba(255, 255, 255, 0.1);
+  --completed-col: #32cd32;
+  --header-title-col: blue;
+
+  --item-bg-col: #1a1a1a;
+  --item-border-hover-col: rgba(255, 255, 255, 0.392);
+  --inputs-bg-col: #1a1a1a;
+  --dialog-bg-col: #121212;
+  --input-border-col: #2d2d2d;
+  --details-name-col: orange;
+  --action-btn-col: orange;
+  --action-btn-col-hover: #ff8c00;
+  --checkbox-border-col: #2d2d2d;
+
+  --text-col: #e0e0e0;
+  --font-weight-1: 700;
+  --font-weight-2: 800;
+  --font-weight-3: 900;
+  --font-weight-4: 1000;
+
+  --footer-bg-col: #1a1a1a;
+  --footer-border-col: rgba(255, 255, 255, 0.15);
+
+  --px: 8px;
+  --py: 4px;
+  --border-radius: 10px;
+  --gap: 5px;
 }
+
+body{
+  background-color: var(--bg-col);
+  transition: background-color 0.3s ease;
+}
+
 
 button {
   cursor: pointer;
@@ -45,17 +94,17 @@ button {
   border: none;
   border-radius: var(--border-radius);
   padding: var(--py) var(--px) var(--py) var(--px);
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 button:hover {
-  box-shadow: 0 0 var(--border-radius) var(--primary-col);
+  box-shadow: 0 0 var(--border-radius) var(--gray);
 }
 
 .config-btn:hover {
+  color: var(--text-col);
   background-color: hsla(0, 100%, 0%, 0.5);
-  box-shadow: 0 0 3px hsla(0, 100%, 0%, 0.5);
-}
+  box-shadow: 0 0 var(--border-radius) var(--gray);}
 
 .task-btn {
   color: white;
@@ -63,7 +112,19 @@ button:hover {
 }
 
 .task-btn:hover {
-  background-color: rgb(0, 0, 192);
+  background-color: var(--primary-col-hover);
+  box-shadow: 0 0 calc(var(--border-radius) * 2) var(--primary-col-hover);
+}
+
+.btn-edit{
+  width: 100%;
+  color: #ffffff;
+  background-color: var(--action-btn-col);
+}
+
+.btn-edit:hover {
+  background-color: var(--action-btn-col);
+  box-shadow: 0 0 calc(var(--border-radius) * 1.75) var(--action-btn-col-hover);
 }
 
 .task-list-container {
@@ -84,15 +145,14 @@ button:hover {
   margin-top: 10px;
 }
 
-.dialog-btn .edit {
-  color: white;
-  background-color: navy;
+.action-btn {
+  color: #ffffff;
+  background-color: var(--action-btn-col);
   width: 100%;
 }
 
-.dialog-btn .edit:hover {
-  background-color: rgb(0, 0, 192);
-  box-shadow: 0 0 5px rgb(0, 0, 192);
+.action-btn:hover {
+  box-shadow: 0 0 calc(var(--border-radius)*1.75) var(--action-btn-col-hover);
 }
 
 ::-webkit-scrollbar {

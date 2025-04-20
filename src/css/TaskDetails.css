@@ -22,7 +22,7 @@
 .details-name {
   font-size: 1.75rem;
   font-weight: var(--font-weight-3);
-  color: navy;
+  color: var(--details-name-col);
   text-align: center;
   margin: 5px 5px;
 }
@@ -48,13 +48,8 @@
   color: rgb(80, 80, 80);
 }
 
-#name {
-  color: navy;
-  text-align: center;
-}
-
 #priority {
-  color: black;
+  color: var(--text-col);
   font-size: 1.4rem;
   font-weight: var(--font-weight-3);
   background-color: rgba(240, 240, 240, 0.35);
@@ -62,7 +57,8 @@
 }
 
 .description {
-  background-color: rgba(240, 240, 240, 0.35);
+  color: var(--text-col);
+  background-color: var(--light-gray);
   border-radius: var(--border-radius);
   padding: 5px;
 }
@@ -74,5 +70,5 @@
 .classification-type {
   font-size: 1.25rem;
   font-weight: var(--font-weight-3);
-  color: black;
+  color: var(--text-col);
 }
