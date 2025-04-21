@@ -34,9 +34,6 @@
   --font-weight-3: 900;
   --font-weight-4: 1000;
 
-  --footer-bg-col: #e6e6e6;
-  --footer-border-col: rgba(0, 0, 0, 0.15);
-
   --px: 8px;
   --py: 4px;
   --border-radius: 10px;
@@ -44,7 +41,7 @@
 
   --sidebar-collapsed-width: 10px;
   --sidebar-expanded-width: 25%;
-  --sidebar-bg-col: #e6e6e6;
+  --sidebar-bg-col: #f3f3f3;
   --sidebar-border-col: rgba(0, 0, 0, 0.15);
   --sidebar-title-text-col: #000080;
 }
@@ -75,9 +72,6 @@
   --font-weight-3: 900;
   --font-weight-4: 1000;
 
-  --footer-bg-col: #1a1a1a;
-  --footer-border-col: rgba(255, 255, 255, 0.15);
-
   --px: 8px;
   --py: 4px;
   --border-radius: 10px;
@@ -92,7 +86,6 @@
 
 body {
   background-color: var(--bg-col);
-  transition: background-color 0.3s ease;
 }
 
 .main-container {

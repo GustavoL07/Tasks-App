@@ -182,7 +182,7 @@ export default function App() {
       />
 
       <Sidebar
-        title={"Tasks App"}
+        title={"Progress"}
         setSidebar={setIsSidebarExpanded}
         taskList={taskList}
       />
@@ -220,8 +220,6 @@ export default function App() {
           </div>
         </div>
       </div>
-
-      <Footer taskList={taskList} />
     </>
   );
 }
