@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Task from "../Task";
 import { getFormattedDay, getFormattedHour, formatDueToValue, randomTaskGenerator } from "../utils";
 
 export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue) {
-  const [taskList, setTaskList] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
+
+  const [taskList, setTaskList] = useState(() => {
+    const savedTaskList = localStorage.getItem("taskList");
+    return savedTaskList ? JSON.parse(savedTaskList) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+  }, [taskList]);
 
   function addTask(name, description, dueTo, classification) {
     const newTask = new Task(name, description, formatDueToValue(dueTo), classification);

@@ -1,7 +1,7 @@
 import "../css/Sidebar.css";
 import Task from "../Task.js";
 
-export default function Sidebar({ taskList, title, setSidebar }) {
+export default function Sidebar({ taskList, title, setSidebar, setTheme, theme }) {
   const listLength = taskList.length;
   const completedTasks = taskList.filter((task) => task.completed).length;
   const completedPercentage = Math.round((completedTasks / listLength) * 100) || 0;
@@ -57,6 +57,12 @@ export default function Sidebar({ taskList, title, setSidebar }) {
             <li>Due to: {latestTask.dueTo}</li>
           </ul>
         )}
+
+        <button
+          className="theme-toggle-btn"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+          {theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode"}
+        </button>
       </div>
     </div>
   );

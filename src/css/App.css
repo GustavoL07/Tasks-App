@@ -184,3 +184,21 @@ button:hover {
   border: 2px solid transparent;
   background-clip: content-box;
 }
+
+.theme-toggle-btn {
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-2);
+  color: white;
+  background-color: var(--primary-col);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: var(--py) var(--px);
+  box-shadow: 0 0 5px var(--primary-col);
+  margin: var(--py) var(--px);
+}
+
+.theme-toggle-btn:hover {
+  background-color: rgb(0, 0, 160);
+  box-shadow: 0 0 var(--border-radius) var(--secondary-col);
+  color: var(--secondary-col);
+}

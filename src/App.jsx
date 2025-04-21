@@ -8,7 +8,6 @@ import { useTaskValues } from "./hooks/taskValues.js";
 import TaskItem from "./components/TaskItem.jsx";
 import FeedbackMsg from "./components/FeedbackMsg.jsx";
 import Header from "./components/Header.jsx";
-import Footer from "./components/Footer.jsx";
 import Dialogs from "./components/Dialogs.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import "./css/App.css";
@@ -20,11 +19,15 @@ export default function App() {
   const { addTaskDialogRef, taskDetailsDialogRef, taskDeleteDialogRef, taskEditDialogRef } =
     useDialogs();
 
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme ? savedTheme : "dark";
+  });
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const {
@@ -185,6 +188,8 @@ export default function App() {
         title={"Progress"}
         setSidebar={setIsSidebarExpanded}
         taskList={taskList}
+        setTheme={setTheme}
+        theme={theme}
       />
 
       <div
