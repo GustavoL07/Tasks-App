@@ -106,7 +106,7 @@ li:last-child {
   transition: border-color 0.2s ease;
 }
 
-.completed-checkbox:hover{
+.completed-checkbox:hover {
   border-color: var(--completed-col);
 }
 
@@ -123,7 +123,7 @@ li:last-child {
   transition: opacity 0.5s ease;
   opacity: 0;
   box-shadow: none;
-  visibility: hidden
+  visibility: hidden;
 }
 
 .completed-checkbox::before {
@@ -173,5 +173,42 @@ li:last-child {
   }
   100% {
     height: calc(var(--checkbox-height) * 1.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 8px 12px;
+    margin: 5px;
+  }
+
+  .name {
+    font-size: 1.4rem;
+  }
+
+  .dueTo {
+    font-size: 0.9rem;
+  }
+
+  .priority {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 480px) {
+  .container {
+    padding: 8px 12px;
+    margin: 5px;
+  }
+
+  .name {
+    font-size: 1.2rem;
+  }
+
+  .dueTo {
+    font-size: 0.8rem;
+  }
+
+  .priority {
+    font-size: 0.9rem;
   }
 }

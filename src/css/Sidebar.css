@@ -71,3 +71,47 @@
   color: var(--completed-col);
   font-weight: var(--font-weight-2);
 }
+
+@media (max-width: 768px) {
+  .sidebar-container {
+    width: var(--sidebar-collapsed-width);
+  }
+
+  .sidebar-container:hover {
+    width: var(--sidebar-expanded-width);
+  }
+
+  .sidebar-content .title {
+    font-size: 1.6rem;
+  }
+
+  .sidebar-content .section-text {
+    font-size: 1.4rem;
+  }
+
+  .sidebar-container li {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-container {
+    width: var(--sidebar-collapsed-width);
+  }
+
+  .sidebar-container:hover {
+    width: var(--sidebar-expanded-width);
+  }
+
+  .sidebar-content .title {
+    font-size: 1.3rem;
+  }
+
+  .sidebar-content .section-text {
+    font-size: 1.1rem;
+  }
+
+  .sidebar-container li {
+    font-size: 1rem;
+  }
+}
