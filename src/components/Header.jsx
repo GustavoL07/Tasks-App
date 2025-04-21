@@ -39,6 +39,7 @@ export default function Header({
           <option value="due-date-soon">Due Date (Soonest)</option>
           <option value="due-date-late">Due Date (Latest)</option>
           <option value="completed">Completed</option>
+          <option value="incompleted">Incompleted</option>
           <option value="priority">Priority</option>
           <option value="type">Type</option>
         </select>

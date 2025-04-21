@@ -93,6 +93,10 @@ export default function useTaskManager(showFeedbackMsg, sortMethod, searchValue)
         if (a.completed === b.completed) return 0;
         else return a.completed ? -1 : 0;
 
+      case "incompleted":
+        if (a.completed === b.completed) return 0;
+        else return a.completed ? 0 : -1;
+
       default:
         return 0;
     }
