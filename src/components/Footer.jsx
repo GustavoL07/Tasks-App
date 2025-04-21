@@ -1,7 +1,7 @@
 import "../css/Footer.css";
 import Task from "../Task.js";
 
-export default function Footer({ taskList, theme, title = "Current Progress" }) {
+export default function Footer({ taskList, title = "Current Progress" }) {
   if (taskList.length === 0) return;
 
   const listLength = taskList.length;

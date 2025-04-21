@@ -10,6 +10,7 @@ import FeedbackMsg from "./components/FeedbackMsg.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Dialogs from "./components/Dialogs.jsx";
+import Sidebar from "./components/Sidebar.jsx";
 import "./css/App.css";
 
 export default function App() {
@@ -20,6 +21,7 @@ export default function App() {
     useDialogs();
 
   const [theme, setTheme] = useState("light");
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -179,34 +181,44 @@ export default function App() {
         type={feedbackMsg.type}
       />
 
-      {/* HEADER */}
-      <Header
+      <Sidebar
         title={"Tasks App"}
-        searchValue={searchValue}
-        onSearchValueChange={setSearchValue}
-        addTaskOnClick={() => addTaskDialogRef.current.showModal()}
-        sortValue={sortMethod}
-        onSortChange={setSortMethod}
+        setSidebar={setIsSidebarExpanded}
+        taskList={taskList}
       />
 
-      <div className="task-list-container">
-        <ul>
-          {taskList.map((task) => (
-            <TaskItem
-              key={task.id}
-              task={task}
-              onDetailsClick={() => {
-                setSelectedTask(task);
-                taskDetailsDialogRef.current.showModal();
-              }}
-              openDeleteDialog={() => {
-                setSelectedTask(task);
-                taskDeleteDialogRef.current.showModal();
-              }}
-              onToggleComplete={() => toggleTaskCompleted(task)}
-            />
-          ))}
-        </ul>
+      <div
+        className={`app-container ${isSidebarExpanded ? "sidebar-expanded" : "sidebar-collapsed"}`}>
+        <div className="content-container">
+          <Header
+            title={"Tasks App"}
+            searchValue={searchValue}
+            onSearchValueChange={setSearchValue}
+            addTaskOnClick={() => addTaskDialogRef.current.showModal()}
+            sortValue={sortMethod}
+            onSortChange={setSortMethod}
+          />
+
+          <div className="task-list-container">
+            <ul>
+              {taskList.map((task) => (
+                <TaskItem
+                  key={task.id}
+                  task={task}
+                  onDetailsClick={() => {
+                    setSelectedTask(task);
+                    taskDetailsDialogRef.current.showModal();
+                  }}
+                  openDeleteDialog={() => {
+                    setSelectedTask(task);
+                    taskDeleteDialogRef.current.showModal();
+                  }}
+                  onToggleComplete={() => toggleTaskCompleted(task)}
+                />
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
 
       <Footer taskList={taskList} />

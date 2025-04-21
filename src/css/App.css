@@ -34,13 +34,19 @@
   --font-weight-3: 900;
   --font-weight-4: 1000;
 
-  --footer-bg-col: rgb(230, 230, 230);
+  --footer-bg-col: #e6e6e6;
   --footer-border-col: rgba(0, 0, 0, 0.15);
 
   --px: 8px;
   --py: 4px;
   --border-radius: 10px;
   --gap: 5px;
+
+  --sidebar-collapsed-width: 10px;
+  --sidebar-expanded-width: 25%;
+  --sidebar-bg-col: #e6e6e6;
+  --sidebar-border-col: rgba(0, 0, 0, 0.15);
+  --sidebar-title-text-col: #000080;
 }
 
 :root[data-theme="dark"] {
@@ -76,13 +82,27 @@
   --py: 4px;
   --border-radius: 10px;
   --gap: 5px;
+
+  --sidebar-collapsed-width: 10px;
+  --sidebar-expanded-width: 25vw;
+  --sidebar-bg-col: #1a1a1a;
+  --sidebar-border-col: #2d2d2d;
+  --sidebar-title-text-col: #0000ff;
 }
 
-body{
+body {
   background-color: var(--bg-col);
   transition: background-color 0.3s ease;
 }
 
+.main-container {
+  display: flex;
+  height: 100%;
+}
+
+.app-container {
+  display: flex;
+}
 
 button {
   cursor: pointer;
@@ -104,7 +124,8 @@ button:hover {
 .config-btn:hover {
   color: var(--text-col);
   background-color: hsla(0, 100%, 0%, 0.5);
-  box-shadow: 0 0 var(--border-radius) var(--gray);}
+  box-shadow: 0 0 var(--border-radius) var(--gray);
+}
 
 .task-btn {
   color: white;
@@ -116,7 +137,7 @@ button:hover {
   box-shadow: 0 0 calc(var(--border-radius) * 2) var(--primary-col-hover);
 }
 
-.btn-edit{
+.btn-edit {
   width: 100%;
   color: #ffffff;
   background-color: var(--action-btn-col);
@@ -152,7 +173,7 @@ button:hover {
 }
 
 .action-btn:hover {
-  box-shadow: 0 0 calc(var(--border-radius)*1.75) var(--action-btn-col-hover);
+  box-shadow: 0 0 calc(var(--border-radius) * 1.75) var(--action-btn-col-hover);
 }
 
 ::-webkit-scrollbar {

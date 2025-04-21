@@ -33,7 +33,7 @@
   content-visibility: auto;
   bottom: 0;
   height: 25vh;
-  box-shadow: 0 0 var(--border-radius) rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 var(--border-radius) #000000e6;
 }
 
 .footer-content {
